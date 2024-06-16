@@ -36,9 +36,20 @@ new_rows = pd.DataFrame(data={
 
 dataframe_two = pd.concat(objs=[dataframe_two, new_rows], ignore_index=True)
 print(dataframe_two)
-
-dataframe_two = dataframe_two.drop(index=[0, 1])
-print(dataframe_two)
+# print('*******************************************')
+# dataframe_two = dataframe_two.drop(index=[0, 1])
+# print(dataframe_two)
 
 # FILTER ROWS OF A DATAFRAME
-pass
+print(dataframe_two[(dataframe_two['AGE'] >= 18) & (dataframe_two['GENDER'] == 'M')])
+print(dataframe_two[(dataframe_two['NAME'].apply(lambda x: len(str(x)) >= 7)) & (dataframe_two['GENDER'] == 'M')])
+
+print(dataframe_two.sort_values(['NAME'], key=lambda x: x.str.len()))  # x ---> It's a pandas series
+# print(dataframe_two.sort_values(['NAME'], key=lambda x: len(str(x))))  # ---> ERROR
+
+
+def convert_to_str(series):
+    return pd.Series([(len(str(x))) for x in series])
+
+
+print(dataframe_two.sort_values(['NAME'], key=lambda series: convert_to_str(series)))
