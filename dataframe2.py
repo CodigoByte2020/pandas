@@ -53,3 +53,4 @@ def convert_to_str(series):
 
 
 print(dataframe_two.sort_values(['NAME'], key=lambda series: convert_to_str(series)))
+# print(dataframe_two.sort_values(['NAME'], key=lambda series: pd.Series([(len(str(x))) for x in series])))
